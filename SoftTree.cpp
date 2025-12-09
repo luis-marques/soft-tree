@@ -285,7 +285,7 @@ void Node::learnParams(const vector< vector<double> > &X, const vector<double> &
   vector<double> dwp(X[0].size()); // previous grad of w
           
   double dw10, dw20, dw0; // grads of w0
-  double dw10p, dw20p, dw0p; // previous grads of w0
+  double dw10p = 0.0, dw20p = 0.0, dw0p = 0.0; // previous grads of w0 (momentum)
 
   for (i=0; i<Y.size(); i++) ix.push_back(i);
 
