@@ -46,13 +46,19 @@ int main(int argc, char *argv[])
 	// Toy dataset regression
 	generateToy(X, Y);  // training set
 	generateToy(V, R);  // validation set (acts as prepruning set)
-			
+	
 	SoftTree st = SoftTree(X, Y, V, R);
 	
 	double y;
-	
-	ofstream outf("out");
-	
+
+	// Dump train inputs/targets for downstream reuse.
+	ofstream trainf("train.txt");
+	for(uint i=0; i<X.size(); i++) {
+          trainf << X[i][0] << " " << Y[i] << endl;
+	}
+	trainf.close();
+
+	ofstream outf("out"); // validation outputs (with preds)
 	for(uint i=0; i<V.size(); i++) {
           y = st.evaluate(V[i]);
           outf << V[i][0] << " " << R[i] << " " << y << endl;
